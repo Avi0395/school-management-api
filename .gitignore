@@ -1,0 +1,36 @@
+# Node.js Modules
+node_modules/
+
+# Environment Variables
+.env
+
+# Logs
+logs
+*.log
+logs/*
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# npm Dependency Files
+package-lock.json
+
+# Build/Generated Files
+dist/
+build/
+.cache/
+
+# IDE/Editor Settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Backup and Temp Files
+*.bak
+*.tmp
