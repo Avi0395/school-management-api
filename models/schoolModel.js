@@ -27,9 +27,18 @@ const insertSchool = (name, address, latitude, longitude, callback) => {
 }
 
 //fetch school data
-const getSchool = (callback) => {
-    const query =`SELECT * FROM SCHOOLS`;
-    db.query(query,callback);
-}
+const getSchoolsSortedByProximity = (userLat, userLng, callback) => {
+    const query = `
+        SELECT *, 
+        (6371 * ACOS(
+            COS(RADIANS(?)) * COS(RADIANS(latitude)) *
+            COS(RADIANS(longitude) - RADIANS(?)) +
+            SIN(RADIANS(?)) * SIN(RADIANS(latitude))
+        )) AS distance
+        FROM schools
+        ORDER BY distance;
+    `;
+    db.query(query, [userLat, userLng, userLat], callback);
+};
 
-module.exports={createSchoolTable,insertSchool,getSchool};
+module.exports={createSchoolTable,insertSchool,getSchoolsSortedByProximity};

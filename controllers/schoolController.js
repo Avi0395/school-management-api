@@ -1,5 +1,5 @@
 const { json } = require('express');
-const { insertSchool, getSchool } = require('../models/schoolModel');
+const { insertSchool, getSchoolsSortedByProximity } = require('../models/schoolModel');
 
 
 //add school
@@ -20,7 +20,13 @@ const addSchool = (req, res) => {
 
 //retrieve schools
 const listSchools=(req, res) => {
-    getSchool((err, results) => {
+    const { latitude, longitude } = req.query;
+
+    if (!latitude || !longitude) {
+        return res.status(400).json({ error: 'Latitude and Longitude are required.' });
+    }
+
+    getSchoolsSortedByProximity(parseFloat(latitude), parseFloat(longitude), (err, results) => {
         if (err) {
             return res.status(500).json({ error: 'Failed to retrieve schools.' });
         }
