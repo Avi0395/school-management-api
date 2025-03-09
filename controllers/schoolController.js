@@ -1,14 +1,15 @@
 const { json } = require('express');
 const { insertSchool, getSchoolsSortedByProximity } = require('../models/schoolModel');
 
-
-//add school
+//add school 
 const addSchool = (req, res) => {
     const { name, address, latitude, longitude } = req.body;
 
     if (!name || !address || !latitude || !longitude) {
         return res.status(400).json({ error: "All fields are required." });
     }
+    
+    
 
     insertSchool(name, address, parseFloat(latitude), parseFloat(longitude), (err) => {
         if (err) {
@@ -19,7 +20,7 @@ const addSchool = (req, res) => {
 };
 
 //retrieve schools
-const listSchools=(req, res) => {
+const listSchools = (req, res) => {
     const { latitude, longitude } = req.query;
 
     if (!latitude || !longitude) {
@@ -32,6 +33,6 @@ const listSchools=(req, res) => {
         }
         res.json(results);
     });
-}; 
+};
 
-module.exports={addSchool,listSchools};
+module.exports = { addSchool, listSchools };

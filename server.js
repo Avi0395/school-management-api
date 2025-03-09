@@ -1,9 +1,9 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const connectDB = require("./config/db");
-
+const db = require("./config/db");  
+const {createSchoolTable}=require('./models/schoolModel')
+createSchoolTable();
 dotenv.config();
-connectDB();
 
 const app = express();
 
