@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: school-management-api
+    env: node
+    buildCommand: npm install
+    startCommand: node server.js
+    plan: free
+    envVars:
+      - key: DB_HOST
+        value: shinkansen.proxy.rlwy.net
+      - key: DB_USER
+        value: root
+      - key: DB_PASSWORD
+        value: HSUCRLKdnFoZtSMXZBagEdPjjWQWQaNB
+      - key: DB_NAME
+        value: railway
+      - key: DB_PORT
+        value: 51366
+      - key: PORT
+        value: 8080
